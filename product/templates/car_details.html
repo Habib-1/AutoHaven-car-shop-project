@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+ <div class="d-flex justify-content-center">
+<div class="card shadow my-5" style="width:80%;">
+    <div class="row g-0">
+      <div class="col-md-6">
+        <img style="width:420px;" src="{{car.image.url}}" class=" rounded-start" alt="...">
+      </div>
+      <div class="col-md-6">
+        <div class="card-body">
+          <h4 class="card-title">Name :{{car.name}}</h4>
+          <h5 class="card-text">Price : {{car.price}}</h5>
+          <h5 class="card-text">Brand : {{car.brand}}</h5>
+          <p class="card-text"><strong>Description :</strong> {{car.description}} </p>
+         <p> <strong>Quantity : {{car.quantity}} </strong></p>
+          
+          {% if request.user.is_authenticated %}
+          <a href="{% url 'buy_now' car.pk %}" class="btn btn-primary shadow-lg fw-bolder">Buy Now</a>
+          {% else %}
+          <a href="{% url 'login' %}" class="btn btn-primary shadow-lg fw-bolder">Buy Now</a>
+          {% endif %}
+            
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="my-3 me-2">
+        <button class="btn btn-primary fw-bolder shadow" >Total Comments : {{count}}</button> 
+      <a class="btn btn-primary fw-bolder shadow" href="{% url 'add_comment' car.pk %}">Add Comment</a>
+    </div>
+    {% for comment in comments %}
+    <div class="d-flex justify-content-center">
+      <div class="card w-100 my-2">
+        <div class="card-header">
+            <h6>Commented By {{comment.name}}</h6>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>{{comment.comment_text}} </p>
+            <footer class="blockquote-footer">Commented at <cite title="Source Title">{{comment.comment_time}} </cite></footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
+

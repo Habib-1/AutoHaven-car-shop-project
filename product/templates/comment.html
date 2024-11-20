@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+    <form method='POST' class="w-50 m-auto shadow p-5 mt-4 border border-top border-primary border-4 border-bottom-0 border-start-0 border-end-0">
+        <h4 class="text-center" >Write Your Comments</h4>
+        {% csrf_token %}
+        {{form|crispy}}
+
+        <button
+            type="submit"
+            class="btn btn-primary"
+        >
+            Submit
+        </button>
+        
+    </form>
+
+{% endblock content %}
+    
