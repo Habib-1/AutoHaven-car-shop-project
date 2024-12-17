@@ -10,7 +10,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import purchase
 from product.models import car
 from django.contrib.auth.decorators import login_required
-# Create your views here.
 
 #register user
 class register(CreateView):
@@ -27,6 +26,8 @@ class register(CreateView):
         self.object = form.save()
         messages.success(self.request,"Account Created Successfully")
         return super().form_valid(form)
+    
+
     def form_invalid(self, form):
         messages.warning(self.request,"Something Went Wrong")
         return self.render_to_response(self.get_context_data(form=form))

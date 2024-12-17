@@ -13,11 +13,19 @@
           <h5 class="card-text">Price : {{car.price}}</h5>
           <h5 class="card-text">Brand : {{car.brand}}</h5>
           <p class="card-text"><strong>Description :</strong> {{car.description}} </p>
-         <p> <strong>Quantity : {{car.quantity}} </strong></p>
+         
           
           {% if request.user.is_authenticated %}
-          <a href="{% url 'buy_now' car.pk %}" class="btn btn-primary shadow-lg fw-bolder">Buy Now</a>
+         
+         {% if car.quantity > 0 %}
+         <p> <strong>Quantity : {{car.quantity}} </strong></p>
+         <a href="{% url 'buy_now' car.pk %}" class="btn btn-primary shadow-lg fw-bolder">Buy Now</a>
+         {% else %}
+         <h3 class="text-danger">Out of stock</h3>
+         {% endif %}
+          
           {% else %}
+          <p> <strong>Quantity : {{car.quantity}} </strong></p>
           <a href="{% url 'login' %}" class="btn btn-primary shadow-lg fw-bolder">Buy Now</a>
           {% endif %}
             
